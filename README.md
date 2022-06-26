@@ -10,8 +10,8 @@ Back-end API of a tasks manager application
 
 ## Routes
 ### Create an account
-- **POST:** /account/register
-- **Body type:** JSON
+- **POST:** `/account/register`
+- **Body type:** `JSON`
 - **Body params:** `firstName`, `lastName`, `email` and `password`
 - **Access-token required:** `false`
 
