@@ -4,6 +4,6 @@ const accountRoutes = Router()
 
 accountRoutes.post('/register', AccountController.register)
 accountRoutes.post('/confirm', AccountController.confirm)
-accountRoutes.post('/confirm/:confirmationToken', AccountController.confirmAccount)
+accountRoutes.get('/confirm/:confirmationToken', AccountController.confirmAccount)
 
 module.exports = accountRoutes
