@@ -10,6 +10,9 @@ const AccountsSchema = new Schema({
     type: Boolean,
     default: false
   },
+  confirmationToken: {
+    type: String
+  },
   refreshPassToken: {
     type: String
   },
