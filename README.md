@@ -22,7 +22,7 @@ Back-end API of a tasks manager application
 - **Access-token required:** `false`
 
 ### Confirm account
-- **POST:** `/account/confirm/:confirmationToken`
+- **GET:** `/account/confirm/:confirmationToken`
 - **Param type:** `Route`
 - **Access-token required:** `false`
 
