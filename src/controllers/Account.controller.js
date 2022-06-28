@@ -6,6 +6,8 @@ const UserRepository = require('../repositories/user.repository')
 const AccountRepository = require('../repositories/account.repository')
 const { v4: V4uuid } = require('uuid')
 const { updateConfirmationTokenById } = require('../repositories/account.repository')
+const { emailSender } = require('../services/email/emailSender')
+const { textConfirmationEmail, htmlConfirmationEmail } = require('../templates/confirmationEmail')
 
 class AccountController {
   static async register (req, res) {
@@ -91,9 +93,9 @@ class AccountController {
 
       const { email } = req.body
 
-      const userExists = await UserRepository.findByEmail({ email })
+      const user = await UserRepository.findByEmail({ email })
 
-      if (!userExists) {
+      if (!user) {
         errorThrower({
           message: {
             description: 'There is no user registered with this email',
@@ -103,11 +105,21 @@ class AccountController {
         })
       }
 
-      const { _id: accountId } = await AccountRepository.findByUserId(userExists._id)
+      const { _id: accountId } = await AccountRepository.findByUserId(user._id)
+
+      const confirmationToken = V4uuid()
 
       await updateConfirmationTokenById({
         accountId,
-        confirmationToken: V4uuid()
+        confirmationToken
+      })
+
+      await emailSender({
+        email,
+        subject: `${user.firstName}, confirm your account`,
+        text: textConfirmationEmail({ name: user.firstName, confirmationToken }),
+        html: htmlConfirmationEmail({ name: user.firstName, confirmationToken }),
+        type: 'Confirmation'
       })
 
       return res.status(200).json(
@@ -135,9 +147,9 @@ class AccountController {
     try {
       const { confirmationToken } = req.params
 
-      const accountExists = await AccountRepository.confirmAccountByToken(confirmationToken)
+      const account = await AccountRepository.confirmAccountByToken(confirmationToken)
 
-      if (!accountExists) {
+      if (!account) {
         errorThrower({
           message: {
             description: 'Error confirming account. Invalid Token.',
@@ -147,11 +159,14 @@ class AccountController {
         })
       }
 
+      const { email } = await UserRepository.findById(account.user)
+
       return res.status(200).json(
         {
           message:
           {
-            description: 'Account confirmed successfully.'
+            description: 'Account confirmed successfully.',
+            email
           }
         })
     } catch (error) {

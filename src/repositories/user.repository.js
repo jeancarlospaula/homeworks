@@ -7,6 +7,11 @@ class UserRepository {
     return newUser
   }
 
+  static async findById (id) {
+    const user = User.findById(id)
+    return user
+  }
+
   static async findByEmail ({ email }) {
     const user = User.findOne({ email })
     return user
