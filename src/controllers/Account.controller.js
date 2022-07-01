@@ -16,6 +16,7 @@ const { emailSender } = require('../services/email/emailSender')
 const { textConfirmationEmail, htmlConfirmationEmail } = require('../templates/confirmationEmail')
 const { textResetPassword, htmlResetPassWord } = require('../templates/resetPasswordEmail')
 const checkTokenExpired = require('../utils/checkTokenExpired')
+const BlacklistRepository = require('../repositories/blacklist.repository')
 
 class AccountController {
   static async register (req, res) {
@@ -401,6 +402,40 @@ class AccountController {
       const response = errorManager({
         error,
         genericMessage: 'Error when logging in. Try again later.'
+      })
+
+      if (error.statusCode) {
+        return res.status(error.statusCode).json(response)
+      }
+
+      return res.status(400).json(response)
+    }
+  }
+
+  static async logout (req, res) {
+    try {
+      const token = req.headers['x-access-token']
+
+      if (!token) {
+        errorThrower({
+          message: {
+            description: 'To logout, it is necessary to inform the x-access-token header.'
+          },
+          statusCode: 400
+        })
+      }
+
+      const tokenInBlacklist = await BlacklistRepository.findOne({ token })
+
+      if (!tokenInBlacklist) {
+        await BlacklistRepository.insert({ token })
+      }
+
+      return res.status(200).json({ message: 'User successfully logged out' })
+    } catch (error) {
+      const response = errorManager({
+        error,
+        genericMessage: 'Error when logging out. Try again later.'
       })
 
       if (error.statusCode) {
