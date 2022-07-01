@@ -7,5 +7,6 @@ accountRoutes.post('/confirm', AccountController.confirm)
 accountRoutes.get('/confirm/:confirmationToken', AccountController.confirmAccount)
 accountRoutes.post('/reset/password', AccountController.resetPasswordEmail)
 accountRoutes.patch('/reset/password/:resetPassToken', AccountController.resetPassword)
+accountRoutes.post('/login', AccountController.login)
 
 module.exports = accountRoutes
