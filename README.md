@@ -44,6 +44,12 @@ Back-end API of a tasks manager application
 - **Body params:** `email` and `password`
 - **Access-token required:** `false`
 
+### Logout
+- **POST:** `/account/logout`
+- **Param type:** `Header`
+- **Header params:** `x-access-token`
+- **Access-token required:** `true`
+
 *More routes will come soon
 
 ## Front-end wireframe
