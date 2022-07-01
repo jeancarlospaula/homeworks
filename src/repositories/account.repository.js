@@ -7,8 +7,18 @@ class AccountRepository {
     return newAccount
   }
 
+  static async findOne (condition) {
+    const account = await Account.findOne(condition)
+    return account
+  }
+
   static async findByUserId (userId) {
     const account = await Account.findOne({ user: userId })
+    return account
+  }
+
+  static async updateAccountByUserId ({ user, fields }) {
+    const account = await Account.findOneAndUpdate({ user }, fields, { new: true })
     return account
   }
 
@@ -18,7 +28,19 @@ class AccountRepository {
   }
 
   static async confirmAccountByToken (confirmationToken) {
-    const account = await Account.findOneAndUpdate({ confirmationToken }, { confirmedEmail: true }, { new: true })
+    const deleteFields = {
+      confirmationToken: 1
+    }
+    const account = await Account.findOneAndUpdate({ confirmationToken }, { $set: { confirmedEmail: true }, $unset: deleteFields }, { new: true })
+    return account
+  }
+
+  static async deleteResetPassword (resetPassToken) {
+    const deleteFields = {
+      resetPassToken: 1,
+      resetPassTokenDate: 1
+    }
+    const account = await Account.findOneAndUpdate({ resetPassToken }, { $unset: deleteFields }, { new: true })
     return account
   }
 }

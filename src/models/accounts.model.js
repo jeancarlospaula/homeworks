@@ -13,10 +13,10 @@ const AccountsSchema = new Schema({
   confirmationToken: {
     type: String
   },
-  refreshPassToken: {
+  resetPassToken: {
     type: String
   },
-  refreshPassTokenDate: {
+  resetPassTokenDate: {
     type: Date
   }
 }, {

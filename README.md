@@ -22,8 +22,20 @@ Back-end API of a tasks manager application
 - **Access-token required:** `false`
 
 ### Confirm account
-- **GET:** `/account/confirm/:confirmationToken`
+- **GET:** `/account/confirm/:id`
 - **Param type:** `Route`
+- **Access-token required:** `false`
+
+### Send reset password email
+- **POST:** `/account/reset/password`
+- **Param type:** `Body`
+- **Body params:** `email`
+- **Access-token required:** `false`
+  
+### Reset password
+- **PATCH:** `/account/reset/password/:id`
+- **Params types:** `Route` and `Body`
+- **Body params:** `password`
 - **Access-token required:** `false`
 
 *More routes will come soon

@@ -12,6 +12,11 @@ class UserRepository {
     return user
   }
 
+  static async findByIdAndUpdate (id, update) {
+    const user = User.findByIdAndUpdate(id, update)
+    return user
+  }
+
   static async findByEmail ({ email }) {
     const user = User.findOne({ email })
     return user
