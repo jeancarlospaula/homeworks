@@ -1,5 +1,12 @@
 const checkBodySchema = require('../utils/bodySchema/checkBodySchema')
-const { registerSchema, confirmEmailSchema, resetPasswordEmailSchema, resetPasswordSchema } = require('../utils/bodySchema/bodySchemas')
+const {
+  registerSchema,
+  confirmEmailSchema,
+  resetPasswordEmailSchema,
+  resetPasswordSchema,
+  loginSchema
+} = require('../utils/bodySchema/bodySchemas')
+const jwt = require('jsonwebtoken')
 const errorManager = require('../utils/errors/errorManager')
 const errorThrower = require('../utils/errors/errorThrower')
 const UserRepository = require('../repositories/user.repository')
@@ -314,6 +321,86 @@ class AccountController {
       const response = errorManager({
         error,
         genericMessage: 'Error resetting password. Try again later.'
+      })
+
+      if (error.statusCode) {
+        return res.status(error.statusCode).json(response)
+      }
+
+      return res.status(400).json(response)
+    }
+  }
+
+  static async login (req, res) {
+    try {
+      const isInvalidBody = checkBodySchema({
+        body: req.body,
+        schema: loginSchema
+      })
+
+      if (isInvalidBody.length) {
+        errorThrower({
+          message: {
+            description: 'JSON sent is incomplete. There are missing required fields.',
+            fields: isInvalidBody
+          },
+          statusCode: 400
+        })
+      }
+
+      const { email, password } = req.body
+
+      const user = await UserRepository.findByEmail({ email })
+
+      if (!user) {
+        errorThrower({
+          message: {
+            description: 'User not found with the email provided.',
+            email
+          },
+          statusCode: 400
+        })
+      }
+
+      const invalidPassword = password !== user.password
+
+      if (invalidPassword) {
+        errorThrower({
+          message: {
+            description: 'Invalid password.',
+            email
+          },
+          statusCode: 400
+        })
+      }
+
+      const { confirmedEmail: isAccountEmailConfirmed } = await AccountRepository.findByUserId(user._id)
+
+      if (!isAccountEmailConfirmed) {
+        errorThrower({
+          message: {
+            description: 'Account not yet confirmed by email.',
+            email
+          },
+          statusCode: 400
+        })
+      }
+
+      const SECRET_JWT = process.env.SECRET_JWT
+
+      const token = jwt.sign({
+        user: user._is
+      },
+      SECRET_JWT,
+      {
+        expiresIn: '24h'
+      })
+
+      return res.status(200).json({ accessToken: token })
+    } catch (error) {
+      const response = errorManager({
+        error,
+        genericMessage: 'Error when logging in. Try again later.'
       })
 
       if (error.statusCode) {
