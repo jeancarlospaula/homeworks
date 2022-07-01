@@ -38,6 +38,12 @@ Back-end API of a tasks manager application
 - **Body params:** `password`
 - **Access-token required:** `false`
 
+### Login
+- **POST:** `/account/login`
+- **Param type:** `Body`
+- **Body params:** `email` and `password`
+- **Access-token required:** `false`
+
 *More routes will come soon
 
 ## Front-end wireframe
