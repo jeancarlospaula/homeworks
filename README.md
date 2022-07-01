@@ -39,3 +39,6 @@ Back-end API of a tasks manager application
 - **Access-token required:** `false`
 
 *More routes will come soon
+
+## Front-end wireframe
+![home-works-scope](https://user-images.githubusercontent.com/79765050/176801314-b38d96c9-dcfa-4d47-9099-3a0875023476.png)
