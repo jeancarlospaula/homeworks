@@ -34,9 +34,6 @@ describe('resetPasswordEmail', () => {
 
       const link = `${env.ENV_URL}/account/reset/password/${resetPassToken}`
 
-      console.log(link)
-      console.log(htmlTemplate)
-
       expect(htmlTemplate).toBe(`<div>
       <p>Hi ${name}, to reset your password,
         <a href='${link}'>click here</a>.
