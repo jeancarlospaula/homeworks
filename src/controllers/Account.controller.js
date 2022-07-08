@@ -7,6 +7,7 @@ const {
   loginSchema
 } = require('../utils/bodySchema/bodySchemas')
 const jwt = require('jsonwebtoken')
+const bcrypt = require('bcrypt')
 const errorManager = require('../utils/errors/errorManager')
 const errorThrower = require('../utils/errors/errorThrower')
 const UserRepository = require('../repositories/user.repository')
@@ -52,11 +53,14 @@ class AccountController {
         })
       }
 
+      const bcryptHash = await bcrypt.genSalt(12)
+      const encryptedPassword = await bcrypt.hash(password, bcryptHash)
+
       const { _id: userId } = await UserRepository.insert({
         firstName,
         lastName,
         email,
-        password
+        password: encryptedPassword
       })
 
       await AccountRepository.insert({ userId, confirmationToken: V4uuid() })
@@ -363,9 +367,9 @@ class AccountController {
         })
       }
 
-      const invalidPassword = password !== user.password
+      const validPassword = await bcrypt.compare(password, user.password)
 
-      if (invalidPassword) {
+      if (!validPassword) {
         errorThrower({
           message: {
             description: 'Invalid password.',
