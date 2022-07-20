@@ -1,12 +1,11 @@
 const { images } = require('./images/images.js')
 
 const htmlConfirmationEmail = ({ name, confirmationToken }) => {
-  const link = `${process.env.ENV_URL}/account/confirm/${confirmationToken}`
   return `<div>
-      <p>Hi ${name}, to confirm your account,
-        <a href='${link}'>click here</a>.
-      </p>
-      <p>Or access: <a href='${link}'>${link}</a></p>
+      <p>Hi ${name}, here is your confirmation token:</p>
+      <br/>
+      <p style="font-size: 25px; letter-spacing: 5px"><b>${confirmationToken}</b></p>
+      <br/>
       <img src='${images.emailBanner}' alt='HomeWorks Logo' height='50'/>
       <br/>
       <br/>
@@ -15,7 +14,7 @@ const htmlConfirmationEmail = ({ name, confirmationToken }) => {
 }
 
 const textConfirmationEmail = ({ name, confirmationToken }) => {
-  return `Hi ${name}, to confirm your account, visit the link below.\nLink: ${process.env.ENV_URL}/account/confirm/${confirmationToken}.\nThis is an automated email, please do not reply.`
+  return `Hi ${name}, here is your confirmation token.\n${confirmationToken}.\nThis is an automated email, please do not reply.`
 }
 
 module.exports = { htmlConfirmationEmail, textConfirmationEmail }

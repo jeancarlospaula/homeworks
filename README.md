@@ -11,19 +11,20 @@ Back-end API of a tasks manager application
 ## Routes
 ### Create an account
 - **POST:** `/account/register`
-- **Params type:** `JSON`
+- **Params type:** `Body`
 - **Body params:** `firstName`, `lastName`, `email` and `password`
 - **Access-token required:** `false`
 
 ### Send account confirmation email
 - **POST:** `/account/confirm`
-- **Params type:** `JSON`
+- **Params type:** `Body`
 - **Body params:** `email`
 - **Access-token required:** `false`
 
 ### Confirm account
-- **GET:** `/account/confirm/:id`
-- **Param type:** `Route`
+- **GET:** `/account/confirm`
+- **Param type:** `Body`
+- **Body params:** `email`, `confirmationToken`
 - **Access-token required:** `false`
 
 ### Send reset password email

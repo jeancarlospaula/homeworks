@@ -27,11 +27,11 @@ class AccountRepository {
     return account
   }
 
-  static async confirmAccountByToken (confirmationToken) {
+  static async confirmAccountByTokenAndEmail (confirmationToken, user) {
     const deleteFields = {
       confirmationToken: 1
     }
-    const account = await Account.findOneAndUpdate({ confirmationToken }, { $set: { confirmedEmail: true }, $unset: deleteFields }, { new: true })
+    const account = await Account.findOneAndUpdate({ confirmationToken, user }, { $set: { confirmedEmail: true }, $unset: deleteFields }, { new: true })
     return account
   }
 
