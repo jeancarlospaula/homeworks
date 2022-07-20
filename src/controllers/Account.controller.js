@@ -4,7 +4,8 @@ const {
   confirmEmailSchema,
   resetPasswordEmailSchema,
   resetPasswordSchema,
-  loginSchema
+  loginSchema,
+  confirmAccountSchema
 } = require('../utils/bodySchema/bodySchemas')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
@@ -18,6 +19,7 @@ const { textConfirmationEmail, htmlConfirmationEmail } = require('../templates/c
 const { textResetPassword, htmlResetPassWord } = require('../templates/resetPasswordEmail')
 const checkTokenExpired = require('../utils/checkTokenExpired')
 const BlacklistRepository = require('../repositories/blacklist.repository')
+const randomNumber = require('random-number')
 
 class AccountController {
   static async register (req, res) {
@@ -120,7 +122,7 @@ class AccountController {
 
       const { _id: accountId } = await AccountRepository.findByUserId(user._id)
 
-      const confirmationToken = V4uuid()
+      const confirmationToken = randomNumber({ min: 100000, max: 999999, integer: true })
 
       await AccountRepository.updateConfirmationTokenById({
         accountId,
@@ -158,28 +160,44 @@ class AccountController {
 
   static async confirmAccount (req, res) {
     try {
-      const { confirmationToken } = req.params
+      const isInvalidBody = checkBodySchema({
+        body: req.body,
+        schema: confirmAccountSchema
+      })
 
-      const account = await AccountRepository.confirmAccountByToken(confirmationToken)
-
-      if (!account) {
+      if (isInvalidBody.length) {
         errorThrower({
           message: {
-            description: 'Error confirming account. Invalid Token.',
-            invalidToken: confirmationToken
+            description: 'JSON sent is incomplete. There are missing required fields.',
+            fields: isInvalidBody
           },
           statusCode: 400
         })
       }
 
-      const { email } = await UserRepository.findById(account.user)
+      const { confirmationToken, email } = req.body
+
+      const { _id: userId, firstName } = await UserRepository.findByEmail({ email })
+      const account = await AccountRepository.confirmAccountByTokenAndEmail(confirmationToken.toString(), userId)
+
+      if (!account) {
+        errorThrower({
+          message: {
+            description: 'Error confirming account. Invalid account or token.',
+            email,
+            confirmationToken: confirmationToken.toString()
+          },
+          statusCode: 400
+        })
+      }
 
       return res.status(200).json(
         {
           message:
           {
             description: 'Account confirmed successfully.',
-            email
+            email,
+            firstName
           }
         })
     } catch (error) {
@@ -401,7 +419,7 @@ class AccountController {
         expiresIn: '24h'
       })
 
-      return res.status(200).json({ accessToken: token })
+      return res.status(200).json({ accessToken: token, firstName: user.firstName })
     } catch (error) {
       const response = errorManager({
         error,
