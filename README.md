@@ -22,9 +22,9 @@ Back-end API of a tasks manager application
 - **Access-token required:** `false`
 
 ### Confirm account
-- **GET:** `/account/confirm`
+- **PATCH:** `/account/confirm`
 - **Param type:** `Body`
-- **Body params:** `email`, `confirmationToken`
+- **Body params:** `email` and `confirmationToken`
 - **Access-token required:** `false`
 
 ### Send reset password email

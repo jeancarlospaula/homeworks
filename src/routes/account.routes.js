@@ -4,7 +4,7 @@ const accountRoutes = Router()
 
 accountRoutes.post('/register', AccountController.register)
 accountRoutes.post('/confirm', AccountController.confirm)
-accountRoutes.get('/confirm/', AccountController.confirmAccount)
+accountRoutes.patch('/confirm/', AccountController.confirmAccount)
 accountRoutes.post('/reset/password', AccountController.resetPasswordEmail)
 accountRoutes.patch('/reset/password/:resetPassToken', AccountController.resetPassword)
 accountRoutes.post('/login', AccountController.login)
