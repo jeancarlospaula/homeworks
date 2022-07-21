@@ -177,8 +177,19 @@ class AccountController {
 
       const { confirmationToken, email } = req.body
 
-      const { _id: userId, firstName } = await UserRepository.findByEmail({ email })
-      const account = await AccountRepository.confirmAccountByTokenAndEmail(confirmationToken.toString(), userId)
+      const user = await UserRepository.findByEmail({ email })
+
+      if (!user) {
+        errorThrower({
+          message: {
+            description: 'There is no user registered with this email',
+            email
+          },
+          statusCode: 400
+        })
+      }
+
+      const account = await AccountRepository.confirmAccountByTokenAndEmail(confirmationToken.toString(), user._id)
 
       if (!account) {
         errorThrower({
@@ -197,7 +208,7 @@ class AccountController {
           {
             description: 'Account confirmed successfully.',
             email,
-            firstName
+            firstName: user.firstName
           }
         })
     } catch (error) {
