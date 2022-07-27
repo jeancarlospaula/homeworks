@@ -420,7 +420,7 @@ class AccountController {
         })
       }
 
-      const SECRET_JWT = process.env.SECRET_JWT
+      const { SECRET_JWT } = process.env
 
       const token = jwt.sign({
         user: user._id
