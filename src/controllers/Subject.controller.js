@@ -60,6 +60,27 @@ class SubjectController {
       return res.status(400).json(response)
     }
   }
+
+  static async list (req, res) {
+    try {
+      const { user } = req
+
+      const subjects = await Subject.find({ user }, 'name')
+
+      return res.status(200).json(subjects)
+    } catch (error) {
+      const response = errorManager({
+        error,
+        genericMessage: 'Error when listing subjects. Try again later.'
+      })
+
+      if (error.statusCode) {
+        return res.status(error.statusCode).json(response)
+      }
+
+      return res.status(400).json(response)
+    }
+  }
 }
 
 module.exports = SubjectController

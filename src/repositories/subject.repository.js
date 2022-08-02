@@ -10,6 +10,11 @@ class SubjectRepository {
     const subject = await Subject.findOne(condition, projection)
     return subject
   }
+
+  static async find (condition, projection) {
+    const subjects = await Subject.find(condition, projection)
+    return subjects
+  }
 }
 
 module.exports = SubjectRepository
