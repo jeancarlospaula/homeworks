@@ -8,7 +8,7 @@ Back-end API of a tasks manager application
   <img align="center" alt="heroku" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-plain-wordmark.svg">
 </div><br>
 
-## Routes
+## Account Routes
 ### Create an account
 - **POST:** `/account/register`
 - **Params type:** `Body`
@@ -48,7 +48,15 @@ Back-end API of a tasks manager application
 ### Logout
 - **POST:** `/account/logout`
 - **Param type:** `Header`
-- **Header params:** `x-access-token`
+- **Header param:** `x-access-token`
+- **Access-token required:** `true`
+
+## Subject Routes
+### Create a subject
+- **POST:** `/subject/create`
+- **Params types:** `Body` and `Header`
+- **Body param:** `name`
+- **Header param:** `x-access-token`
 - **Access-token required:** `true`
 
 *More routes will come soon
