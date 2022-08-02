@@ -3,11 +3,11 @@ const Blacklist = require('../models/blacklists.model')
 class BlacklistRepository {
   static async insert ({ token }) {
     const blacklist = new Blacklist({ token })
-    await blacklist.save()
+    return await blacklist.save()
   }
 
   static async findOne (condition) {
-    const blacklist = Blacklist.findOne(condition)
+    const blacklist = await Blacklist.findOne(condition)
     return blacklist
   }
 }
