@@ -4,6 +4,7 @@ const confirmAccountSchema = ['email', 'confirmationToken']
 const resetPasswordEmailSchema = ['email']
 const resetPasswordSchema = ['password']
 const loginSchema = ['email', 'password']
+const createSubjectSchema = ['name']
 
 module.exports = {
   registerSchema,
@@ -11,5 +12,6 @@ module.exports = {
   resetPasswordEmailSchema,
   resetPasswordSchema,
   loginSchema,
-  confirmAccountSchema
+  confirmAccountSchema,
+  createSubjectSchema
 }
