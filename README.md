@@ -13,43 +13,36 @@ Back-end API of a tasks manager application
 - **POST:** `/account/register`
 - **Params type:** `Body`
 - **Body params:** `firstName`, `lastName`, `email` and `password`
-- **Access-token required:** `false`
 
 ### Send account confirmation email
 - **POST:** `/account/confirm`
 - **Params type:** `Body`
 - **Body params:** `email`
-- **Access-token required:** `false`
 
 ### Confirm account
 - **PATCH:** `/account/confirm`
 - **Param type:** `Body`
 - **Body params:** `email` and `confirmationToken`
-- **Access-token required:** `false`
 
 ### Send reset password email
 - **POST:** `/account/reset/password`
 - **Param type:** `Body`
 - **Body params:** `email`
-- **Access-token required:** `false`
   
 ### Reset password
 - **PATCH:** `/account/reset/password/:id`
 - **Params types:** `Route` and `Body`
 - **Body params:** `password`
-- **Access-token required:** `false`
 
 ### Login
 - **POST:** `/account/login`
 - **Param type:** `Body`
 - **Body params:** `email` and `password`
-- **Access-token required:** `false`
 
 ### Logout
 - **POST:** `/account/logout`
 - **Param type:** `Header`
 - **Header param:** `x-access-token`
-- **Access-token required:** `true`
 
 ## Subject Routes
 ### Create a subject
@@ -57,12 +50,16 @@ Back-end API of a tasks manager application
 - **Params types:** `Body` and `Header`
 - **Body param:** `name`
 - **Header param:** `x-access-token`
-- **Access-token required:** `true`
+
 ### List all user subjects
 - **GET:** `/subject/list`
 - **Param type:** `Header`
 - **Header param:** `x-access-token`
-- **Access-token required:** `true`
+
+### Get an user subjects by id
+- **GET:** `/subject/:id`
+- **Params types:** `Header` and `Route`
+- **Header param:** `x-access-token`
 
 *More routes will come soon
 

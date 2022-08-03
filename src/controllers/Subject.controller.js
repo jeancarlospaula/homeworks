@@ -4,6 +4,7 @@ const checkBodySchema = require('../utils/bodySchema/checkBodySchema')
 const errorManager = require('../utils/errors/errorManager')
 const errorThrower = require('../utils/errors/errorThrower')
 const Subject = require('../repositories/subject.repository')
+const { isValidObjectId } = require('mongoose')
 
 class SubjectController {
   static async create (req, res) {
@@ -57,7 +58,7 @@ class SubjectController {
         return res.status(error.statusCode).json(response)
       }
 
-      return res.status(400).json(response)
+      return res.status(500).json(response)
     }
   }
 
@@ -78,7 +79,50 @@ class SubjectController {
         return res.status(error.statusCode).json(response)
       }
 
-      return res.status(400).json(response)
+      return res.status(500).json(response)
+    }
+  }
+
+  static async getById (req, res) {
+    try {
+      const { id } = req.params
+
+      if (!isValidObjectId(id)) {
+        errorThrower({
+          message: {
+            description: 'Subject not found with id provided.',
+            data: { id }
+          },
+          statusCode: 404
+        })
+      }
+
+      const { user } = req
+
+      const subject = await Subject.findOne({ _id: id, user }, 'name')
+
+      if (!subject) {
+        errorThrower({
+          message: {
+            description: 'Subject not found with id provided.',
+            data: { id }
+          },
+          statusCode: 404
+        })
+      }
+
+      return res.status(200).json(subject)
+    } catch (error) {
+      const response = errorManager({
+        error,
+        genericMessage: 'Error when getting subject by id. Try again later.'
+      })
+
+      if (error.statusCode) {
+        return res.status(error.statusCode).json(response)
+      }
+
+      return res.status(500).json(response)
     }
   }
 }
