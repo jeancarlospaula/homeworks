@@ -3,6 +3,7 @@ const cors = require('cors')
 const handlerRequestError = require('../middlewares/handlerRequestError')
 const accountRoutes = require('./account.routes')
 const subjectRoutes = require('./subject.routes')
+const taskRoutes = require('./task.routes')
 
 const routes = express.Router()
 routes.use(
@@ -19,5 +20,6 @@ routes.get('/', (req, res) => {
 
 routes.use('/account', accountRoutes)
 routes.use('/subject', subjectRoutes)
+routes.use('/task', taskRoutes)
 
 module.exports = routes
