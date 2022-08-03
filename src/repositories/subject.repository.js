@@ -20,6 +20,11 @@ class SubjectRepository {
     const subject = await Subject.findOneAndDelete(condition, projection)
     return subject
   }
+
+  static async pushTask (condition, taskId) {
+    const subject = await Subject.updateOne(condition, { $push: { tasks: taskId } })
+    return subject
+  }
 }
 
 module.exports = SubjectRepository
