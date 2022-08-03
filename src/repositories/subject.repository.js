@@ -15,6 +15,11 @@ class SubjectRepository {
     const subjects = await Subject.find(condition, projection)
     return subjects
   }
+
+  static async findOneAndDelete (condition, projection) {
+    const subject = await Subject.findOneAndDelete(condition, projection)
+    return subject
+  }
 }
 
 module.exports = SubjectRepository
