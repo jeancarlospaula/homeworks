@@ -1,4 +1,3 @@
-// const checkBodySchema = require('../utils/bodySchema/checkBodySchema')
 const { createSubjectSchema } = require('../utils/bodySchema/bodySchemas')
 const checkBodySchema = require('../utils/bodySchema/checkBodySchema')
 const errorManager = require('../utils/errors/errorManager')
