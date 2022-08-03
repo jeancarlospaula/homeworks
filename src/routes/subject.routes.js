@@ -5,5 +5,6 @@ const subjectRoutes = Router()
 
 subjectRoutes.post('/create', validateToken, SubjectController.create)
 subjectRoutes.get('/list', validateToken, SubjectController.list)
+subjectRoutes.get('/:id', validateToken, SubjectController.getById)
 
 module.exports = subjectRoutes
