@@ -9,7 +9,11 @@ const SubjectSchema = new Schema({
     type: Types.ObjectId,
     ref: 'Users',
     required: true
-  }
+  },
+  tasks: [{
+    type: Types.ObjectId,
+    ref: 'Tasks'
+  }]
 }, {
   timestamps: true
 })
