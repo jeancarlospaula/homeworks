@@ -66,6 +66,13 @@ Back-end API of a tasks manager application
 - **Params types:** `Header` and `Route`
 - **Header param:** `x-access-token`
 
+## Task Routes
+### Create a task
+- **POST:** `/task/create`
+- **Params types:** `Body` and `Header`
+- **Body param:** `name`,`subject` and `finalDate`
+- **Header param:** `x-access-token`
+
 *More routes will come soon
 
 ## Front-end wireframe
