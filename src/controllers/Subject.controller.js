@@ -125,6 +125,49 @@ class SubjectController {
       return res.status(500).json(response)
     }
   }
+
+  static async delete (req, res) {
+    try {
+      const { id } = req.params
+
+      if (!isValidObjectId(id)) {
+        errorThrower({
+          message: {
+            description: 'Subject not found with id provided.',
+            data: { id }
+          },
+          statusCode: 404
+        })
+      }
+
+      const { user } = req
+
+      const subject = await Subject.findOneAndDelete({ _id: id, user })
+
+      if (!subject) {
+        errorThrower({
+          message: {
+            description: 'Subject not found with id provided.',
+            data: { id }
+          },
+          statusCode: 404
+        })
+      }
+
+      return res.status(200).json({ message: 'Subject deleted successfully' })
+    } catch (error) {
+      const response = errorManager({
+        error,
+        genericMessage: 'Error when deleting subject by id. Try again later.'
+      })
+
+      if (error.statusCode) {
+        return res.status(error.statusCode).json(response)
+      }
+
+      return res.status(500).json(response)
+    }
+  }
 }
 
 module.exports = SubjectController

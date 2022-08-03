@@ -56,8 +56,13 @@ Back-end API of a tasks manager application
 - **Param type:** `Header`
 - **Header param:** `x-access-token`
 
-### Get an user subjects by id
+### Get an user subject by id
 - **GET:** `/subject/:id`
+- **Params types:** `Header` and `Route`
+- **Header param:** `x-access-token`
+
+### Delete an user subject by id
+- **DELETE:** `/subject/:id`
 - **Params types:** `Header` and `Route`
 - **Header param:** `x-access-token`
 
