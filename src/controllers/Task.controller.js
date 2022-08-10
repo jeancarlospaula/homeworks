@@ -100,6 +100,27 @@ class TaskController {
       return res.status(500).json(response)
     }
   }
+
+  static async list (req, res) {
+    try {
+      const { user } = req
+
+      const tasks = await Task.find({ user }, '-user -createdAt -updatedAt -__v')
+
+      return res.status(200).json(tasks)
+    } catch (error) {
+      const response = errorManager({
+        error,
+        genericMessage: 'Error listing tasks. Try again later.'
+      })
+
+      if (error.statusCode) {
+        return res.status(error.statusCode).json(response)
+      }
+
+      return res.status(500).json(response)
+    }
+  }
 }
 
 module.exports = TaskController
