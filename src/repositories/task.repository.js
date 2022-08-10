@@ -12,7 +12,7 @@ class TaskRepository {
   }
 
   static async find (condition, projection) {
-    const tasks = await Task.find(condition, projection)
+    const tasks = await Task.find(condition, projection).populate('subject', 'name')
     return tasks
   }
 
