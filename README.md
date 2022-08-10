@@ -73,6 +73,12 @@ Back-end API of a tasks manager application
 - **Body param:** `name`,`subject` and `finalDate`
 - **Header param:** `x-access-token`
 
+### List all user tasks
+- **GET:** `/task/list`
+- **Param type:** `Header`
+- **Header param:** `x-access-token`
+
+
 *More routes will come soon
 
 ## Front-end wireframe
