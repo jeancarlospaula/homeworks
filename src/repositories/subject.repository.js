@@ -25,6 +25,11 @@ class SubjectRepository {
     const subject = await Subject.updateOne(condition, { $push: { tasks: taskId } })
     return subject
   }
+
+  static async pullTask (condition, taskId) {
+    const subject = await Subject.updateOne(condition, { $pull: { tasks: taskId } })
+    return subject
+  }
 }
 
 module.exports = SubjectRepository
