@@ -5,5 +5,6 @@ const taskRoutes = Router()
 
 taskRoutes.post('/create', validateToken, TasksController.create)
 taskRoutes.get('/list', validateToken, TasksController.list)
+taskRoutes.get('/:id', validateToken, TasksController.getById)
 
 module.exports = taskRoutes

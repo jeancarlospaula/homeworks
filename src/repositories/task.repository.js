@@ -7,7 +7,7 @@ class TaskRepository {
   }
 
   static async findOne (condition, projection) {
-    const task = await Task.findOne(condition, projection)
+    const task = await Task.findOne(condition, projection).populate('subject', 'name')
     return task
   }
 
