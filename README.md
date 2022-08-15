@@ -83,6 +83,11 @@ Back-end API of a tasks manager application
 - **Params types:** `Header` and `Route`
 - **Header param:** `x-access-token`
 
+### Delete an user task by id
+- **DELETE:** `/task/:id`
+- **Params types:** `Header` and `Route`
+- **Header param:** `x-access-token`
+
 
 *More routes will come soon
 
