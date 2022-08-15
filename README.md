@@ -78,6 +78,11 @@ Back-end API of a tasks manager application
 - **Param type:** `Header`
 - **Header param:** `x-access-token`
 
+### Get an user task by id
+- **GET:** `/task/:id`
+- **Params types:** `Header` and `Route`
+- **Header param:** `x-access-token`
+
 
 *More routes will come soon
 

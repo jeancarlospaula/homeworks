@@ -121,6 +121,48 @@ class TaskController {
       return res.status(500).json(response)
     }
   }
+
+  static async getById (req, res) {
+    try {
+      const { user } = req
+      const { id } = req.params
+
+      if (!isValidObjectId(id)) {
+        errorThrower({
+          message: {
+            description: 'Task not found with id provided.',
+            data: { id }
+          },
+          statusCode: 404
+        })
+      }
+
+      const task = await Task.findOne({ _id: id, user }, '-user -createdAt -updatedAt -__v')
+
+      if (!task) {
+        errorThrower({
+          message: {
+            description: 'Task not found with id provided.',
+            id
+          },
+          statusCode: 404
+        })
+      }
+
+      return res.status(200).json(task)
+    } catch (error) {
+      const response = errorManager({
+        error,
+        genericMessage: 'Error getting task. Try again later.'
+      })
+
+      if (error.statusCode) {
+        return res.status(error.statusCode).json(response)
+      }
+
+      return res.status(500).json(response)
+    }
+  }
 }
 
 module.exports = TaskController
