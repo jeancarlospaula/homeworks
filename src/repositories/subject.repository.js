@@ -11,6 +11,11 @@ class SubjectRepository {
     return subject
   }
 
+  static async findOneAndUpdate (condition, update, projection) {
+    const subject = await Subject.findOneAndUpdate(condition, update, { new: true, projection })
+    return subject
+  }
+
   static async find (condition, projection) {
     const subjects = await Subject.find(condition, projection)
     return subjects
