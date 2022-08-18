@@ -389,10 +389,9 @@ class AccountController {
       if (!user) {
         errorThrower({
           message: {
-            description: 'User not found with the email provided.',
-            email
+            description: 'Incorrect email or password.'
           },
-          statusCode: 400
+          statusCode: 401
         })
       }
 
@@ -401,10 +400,9 @@ class AccountController {
       if (!validPassword) {
         errorThrower({
           message: {
-            description: 'Invalid password.',
-            email
+            description: 'Incorrect email or password.'
           },
-          statusCode: 400
+          statusCode: 401
         })
       }
 
