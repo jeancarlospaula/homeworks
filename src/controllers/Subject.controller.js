@@ -1,4 +1,4 @@
-const { createSubjectSchema } = require('../utils/bodySchema/bodySchemas')
+const { createSubjectSchema, updateSubjectSchema } = require('../utils/bodySchema/bodySchemas')
 const checkBodySchema = require('../utils/bodySchema/checkBodySchema')
 const errorManager = require('../utils/errors/errorManager')
 const errorThrower = require('../utils/errors/errorThrower')
@@ -158,6 +158,65 @@ class SubjectController {
       const response = errorManager({
         error,
         genericMessage: 'Error when deleting subject by id. Try again later.'
+      })
+
+      if (error.statusCode) {
+        return res.status(error.statusCode).json(response)
+      }
+
+      return res.status(500).json(response)
+    }
+  }
+
+  static async update (req, res) {
+    try {
+      const { id } = req.params
+
+      const isInvalidBody = checkBodySchema({
+        body: req.body,
+        schema: updateSubjectSchema
+      })
+
+      if (isInvalidBody.length) {
+        errorThrower({
+          message: {
+            description: 'JSON sent is incomplete. There are missing required fields.',
+            fields: isInvalidBody
+          },
+          statusCode: 400
+        })
+      }
+
+      if (!isValidObjectId(id)) {
+        errorThrower({
+          message: {
+            description: 'Subject not found with id provided.',
+            data: { id }
+          },
+          statusCode: 404
+        })
+      }
+
+      const { user } = req
+      const { name } = req.body
+
+      const subject = await Subject.findOneAndUpdate({ _id: id, user }, { name }, 'name')
+
+      if (!subject) {
+        errorThrower({
+          message: {
+            description: 'Subject not found with id provided.',
+            data: { id }
+          },
+          statusCode: 404
+        })
+      }
+
+      return res.status(200).json({ message: 'Subject updated successfully' })
+    } catch (error) {
+      const response = errorManager({
+        error,
+        genericMessage: 'Error when updating subject by id. Try again later.'
       })
 
       if (error.statusCode) {
