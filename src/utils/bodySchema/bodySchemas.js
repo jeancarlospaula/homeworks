@@ -5,6 +5,7 @@ const resetPasswordEmailSchema = ['email']
 const resetPasswordSchema = ['password']
 const loginSchema = ['email', 'password']
 const createSubjectSchema = ['name']
+const updateSubjectSchema = ['name']
 const createTaskSchema = ['name', 'subject', 'finalDate']
 
 module.exports = {
@@ -15,5 +16,6 @@ module.exports = {
   loginSchema,
   confirmAccountSchema,
   createSubjectSchema,
+  updateSubjectSchema,
   createTaskSchema
 }
