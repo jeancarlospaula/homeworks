@@ -11,6 +11,11 @@ class TaskRepository {
     return task
   }
 
+  static async findOneAndUpdate (condition, update, projection) {
+    const task = await Task.findOneAndUpdate(condition, update, { new: true, projection })
+    return task
+  }
+
   static async find (condition, projection) {
     const tasks = await Task.find(condition, projection).populate('subject', 'name')
     return tasks

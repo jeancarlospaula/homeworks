@@ -7,5 +7,6 @@ taskRoutes.post('/create', validateToken, TasksController.create)
 taskRoutes.get('/list', validateToken, TasksController.list)
 taskRoutes.get('/:id', validateToken, TasksController.getById)
 taskRoutes.delete('/:id', validateToken, TasksController.delete)
+taskRoutes.patch('/:id', validateToken, TasksController.update)
 
 module.exports = taskRoutes
