@@ -141,9 +141,26 @@ class SubjectController {
 
       const { user } = req
 
-      const subject = await Subject.findOneAndDelete({ _id: id, user })
+      const subject = await Subject.findOne({ _id: id, user }, 'name tasks')
 
-      if (!subject) {
+      const subjectTasks = subject.tasks?.length
+
+      if (subjectTasks) {
+        errorThrower({
+          message: {
+            description: `Subject has ${subjectTasks} tasks related to it. Not is possible to delete it.`,
+            data: {
+              id,
+              tasks: subject.tasks
+            }
+          },
+          statusCode: 400
+        })
+      }
+
+      const subjectDeleted = await Subject.findOneAndDelete({ _id: id, user })
+
+      if (!subjectDeleted) {
         errorThrower({
           message: {
             description: 'Subject not found with id provided.',

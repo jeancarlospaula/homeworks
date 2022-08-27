@@ -226,7 +226,7 @@ class TaskController {
         })
       }
 
-      const task = await Task.findOne({ _id: id, user }, 'name')
+      const task = await Task.findOne({ _id: id, user }, 'subject')
 
       if (!task) {
         errorThrower({
@@ -287,6 +287,9 @@ class TaskController {
             statusCode: 400
           })
         }
+
+        await Subject.pullTask({ _id: task.subject._id, user }, id)
+        await Subject.pushTask({ _id: newData.subject, user }, id)
       }
 
       await Task.findOneAndUpdate({ _id: id, user }, newData)
