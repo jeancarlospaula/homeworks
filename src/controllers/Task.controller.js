@@ -68,7 +68,7 @@ class TaskController {
         name,
         user: req.user,
         subject,
-        finalDate
+        finalDate: moment(finalDate).endOf('day').toISOString()
       })
 
       await Subject.pushTask({ _id: subject, user: req.user }, task._id)
