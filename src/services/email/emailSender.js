@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer')
 const errorThrower = require('../../utils/errors/errorThrower')
 
-const emailSender = async ({ email, subject, text, html, type }) => {
+const emailSender = async ({ email, subject, text, html, type, attachments }) => {
   let emailSent = false
 
   const transporter = nodemailer.createTransport({
@@ -19,7 +19,8 @@ const emailSender = async ({ email, subject, text, html, type }) => {
     to: email,
     subject,
     text,
-    html
+    html,
+    attachments
   })
     .then(_ => {
       console.log(`${type} email sent to ${email} via nodemailer`)
