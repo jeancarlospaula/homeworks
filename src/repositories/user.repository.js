@@ -7,8 +7,8 @@ class UserRepository {
     return newUser
   }
 
-  static async findById (id) {
-    const user = User.findById(id)
+  static async findById (id, projection) {
+    const user = User.findById(id, projection)
     return user
   }
 
