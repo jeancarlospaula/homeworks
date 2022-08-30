@@ -1,0 +1,188 @@
+{
+  "content":  [
+     {
+      "style": "header",
+      "text": "RELATÓRIO DE TAREFAS"
+    },
+     {
+      "style": "table",
+      "table":  {
+        "body":  [
+           [
+             {
+              "style": "tableHeader",
+              "text": "Nome"
+            },
+             {
+              "style": "tableHeader",
+              "text": "Matéria"
+            },
+             {
+              "style": "tableHeader",
+              "text": "Situação"
+            },
+             {
+              "style": "tableHeader",
+              "text": "Data Final"
+            }
+          ],
+           [
+             {
+              "style": "taskName",
+              "text": "Task 1"
+            },
+             {
+              "style": "rowText",
+              "text": "Subject 1"
+            },
+             {
+              "style": "onTimeTask",
+              "text": "EM ANDAMENTO"
+            },
+             {
+              "style": "rowText",
+              "text": "31/08/2022"
+            }
+          ],
+           [
+             {
+              "style": "taskName",
+              "text": "Task 2"
+            },
+             {
+              "style": "rowText",
+              "text": "Subject 2"
+            },
+             {
+              "style": "onTimeTask",
+              "text": "EM ANDAMENTO"
+            },
+             {
+              "style": "rowText",
+              "text": "31/08/2022"
+            }
+          ],
+           [
+             {
+              "style": "taskName",
+              "text": "Task 3"
+            },
+             {
+              "style": "rowText",
+              "text": "Subject 3"
+            },
+             {
+              "style": "onTimeTask",
+              "text": "EM ANDAMENTO"
+            },
+             {
+              "style": "rowText",
+              "text": "31/08/2022"
+            }
+          ]
+        ],
+        "headerRows": 1,
+        "widths":  [
+          "*",
+          "*",
+          "*",
+          "*"
+        ]
+      }
+    }
+  ],
+  "defaultStyle":  {
+    "font": "Helvetica"
+  },
+  "footer":  {
+    "columns":  [
+       {
+        "alignment": "center",
+        "color": "#808080",
+        "fontSize": 8,
+        "margin":  [
+          0,
+          0,
+          0,
+          10
+        ],
+        "text": "Filtros utilizados | Matérias: Subject 1, Subject 2, Subject 3 | Situação: Em andamento | Data Final: 31/08/2022 - 31/08/2022"
+      }
+    ]
+  },
+  "styles":  {
+    "finishedTask":  {
+      "alignment": "center",
+      "color": "green",
+      "margin":  [
+        0,
+        5,
+        0,
+        5
+      ]
+    },
+    "header":  {
+      "alignment": "center",
+      "bold": true,
+      "fontSize": 18,
+      "margin":  [
+        0,
+        0,
+        0,
+        10
+      ]
+    },
+    "lateTask":  {
+      "alignment": "center",
+      "color": "red",
+      "margin":  [
+        0,
+        5,
+        0,
+        5
+      ]
+    },
+    "onTimeTask":  {
+      "alignment": "center",
+      "color": "#6557f5",
+      "margin":  [
+        0,
+        5,
+        0,
+        5
+      ]
+    },
+    "rowText":  {
+      "alignment": "center",
+      "margin":  [
+        0,
+        5,
+        0,
+        5
+      ]
+    },
+    "table":  {
+      "margin":  [
+        0,
+        5,
+        0,
+        15
+      ]
+    },
+    "tableHeader":  {
+      "alignment": "center",
+      "bold": true,
+      "color": "black",
+      "fillColor": "#6557f5",
+      "fontSize": 13
+    },
+    "taskName":  {
+      "margin":  [
+        0,
+        5,
+        0,
+        5
+      ]
+    }
+  }
+}
