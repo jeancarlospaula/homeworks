@@ -35,6 +35,11 @@ class SubjectRepository {
     const subject = await Subject.updateOne(condition, { $pull: { tasks: taskId } })
     return subject
   }
+
+  static async findByIdList (idList, projection) {
+    const subjects = await Subject.find({ _id: { $in: idList } }, projection)
+    return subjects
+  }
 }
 
 module.exports = SubjectRepository

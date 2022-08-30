@@ -17,7 +17,7 @@ class TaskRepository {
   }
 
   static async find (condition, projection) {
-    const tasks = await Task.find(condition, projection).populate('subject', 'name')
+    const tasks = await Task.find(condition, projection).sort({ finalDate: 1, subject: 1 }).populate('subject', 'name')
     return tasks
   }
 
