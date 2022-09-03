@@ -35,9 +35,9 @@
               "style": "rowText",
               "text": "Subject 1"
             },
-             {
-              "style": "onTimeTask",
-              "text": "EM ANDAMENTO"
+            {
+              "style": "lateTask",
+              "text": "ATRASADO"
             },
              {
               "style": "rowText",
@@ -53,9 +53,9 @@
               "style": "rowText",
               "text": "Subject 2"
             },
-             {
-              "style": "onTimeTask",
-              "text": "EM ANDAMENTO"
+            {
+              "style": "lateTask",
+              "text": "ATRASADO"
             },
              {
               "style": "rowText",
@@ -71,9 +71,9 @@
               "style": "rowText",
               "text": "Subject 3"
             },
-             {
-              "style": "onTimeTask",
-              "text": "EM ANDAMENTO"
+            {
+              "style": "lateTask",
+              "text": "ATRASADO"
             },
              {
               "style": "rowText",

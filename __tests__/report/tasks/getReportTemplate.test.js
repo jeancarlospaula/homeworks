@@ -96,21 +96,21 @@ describe('getReportTemplate', () => {
         subject: {
           name: 'Subject 1'
         },
-        finalDate: moment().add({ days: 1 })
+        finalDate: moment('2022-08-31')
       },
       {
         name: 'Task 2',
         subject: {
           name: 'Subject 2'
         },
-        finalDate: moment().add({ days: 1 })
+        finalDate: moment('2022-08-31')
       },
       {
         name: 'Task 3',
         subject: {
           name: 'Subject 3'
         },
-        finalDate: moment().add({ days: 1 })
+        finalDate: moment('2022-08-31')
       }
     ]
 
@@ -118,7 +118,7 @@ describe('getReportTemplate', () => {
       status: '0, 1, 2',
       subject: ['Subject 1', 'Subject 2', 'Subject 3'],
       language: 'pt',
-      finalDate: moment().add({ days: 1 }).toISOString()
+      finalDate: moment('2022-08-31').toISOString()
     }
 
     const docDefinition = getReportTemplate({ tasks, filters })
