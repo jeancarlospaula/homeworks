@@ -181,8 +181,7 @@ class AccountController {
       if (!user) {
         errorThrower({
           message: {
-            description: 'Error confirming account. Invalid email or token.',
-            email
+            description: 'Error confirming account. Invalid email or token.'
           },
           statusCode: 400
         })
@@ -193,9 +192,7 @@ class AccountController {
       if (!account) {
         errorThrower({
           message: {
-            description: 'Error confirming account. Invalid email or token.',
-            email,
-            confirmationToken: confirmationToken.toString()
+            description: 'Error confirming account. Invalid email or token.'
           },
           statusCode: 400
         })
