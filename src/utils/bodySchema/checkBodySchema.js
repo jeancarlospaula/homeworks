@@ -1,11 +1,11 @@
 const checkBodySchema = ({ body, schema }) => {
-  const undefiendFields = []
+  const undefinedFields = []
 
   schema.forEach(prop => {
-    if (!body[prop]) return undefiendFields.push(prop)
+    if (!body[prop]) return undefinedFields.push(prop)
   })
 
-  return undefiendFields
+  return undefinedFields
 }
 
-module.exports = checkBodySchema
+module.exports = { checkBodySchema }

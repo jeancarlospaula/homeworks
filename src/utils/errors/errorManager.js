@@ -14,4 +14,4 @@ const errorManager = ({ error, genericMessage }) => {
   return { error: { message: genericMessage } }
 }
 
-module.exports = errorManager
+module.exports = { errorManager }

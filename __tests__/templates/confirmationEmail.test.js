@@ -1,5 +1,4 @@
-const { htmlConfirmationEmail, textConfirmationEmail } = require('../../src/templates/confirmationEmail')
-const { images } = require('../../src/templates/images/images.js')
+const templates = require('../../src/templates')
 
 beforeEach(() => {
   jest.resetModules()
@@ -11,7 +10,7 @@ describe('confirmationEmail', () => {
       const name = 'Test Name'
       const confirmationToken = '123456'
 
-      const textTemplate = textConfirmationEmail({
+      const textTemplate = templates.text.confirmationEmail({
         name,
         confirmationToken
       })
@@ -24,7 +23,7 @@ describe('confirmationEmail', () => {
       const name = 'Test Name'
       const confirmationToken = '123456'
 
-      const htmlTemplate = htmlConfirmationEmail({
+      const htmlTemplate = templates.html.confirmationEmail({
         name,
         confirmationToken
       })
@@ -35,7 +34,7 @@ describe('confirmationEmail', () => {
       <br/>
       <p style="font-size: 25px; letter-spacing: 5px"><b>${confirmationToken}</b></p>
       <br/>
-      <img src='${images.emailBanner}' alt='HomeWorks Logo' height='50'/>
+      <img src='${templates.images.emailBanner}' alt='HomeWorks Logo' height='50'/>
       <br/>
       <br/>
       <p>This is an automated email, please do not reply.</p>

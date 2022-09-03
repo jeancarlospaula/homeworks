@@ -1,16 +1,19 @@
-const { createSubjectSchema, updateSubjectSchema } = require('../utils/bodySchema/bodySchemas')
-const checkBodySchema = require('../utils/bodySchema/checkBodySchema')
-const errorManager = require('../utils/errors/errorManager')
-const errorThrower = require('../utils/errors/errorThrower')
-const Subject = require('../repositories/subject.repository')
 const { isValidObjectId } = require('mongoose')
+const { SubjectRepository: Subject } = require('../repositories')
+
+const {
+  checkBodySchema,
+  errorManager,
+  errorThrower,
+  bodySchemas
+} = require('../utils')
 
 class SubjectController {
   static async create (req, res) {
     try {
       const isInvalidBody = checkBodySchema({
         body: req.body,
-        schema: createSubjectSchema
+        schema: bodySchemas.subject.create
       })
 
       if (isInvalidBody.length) {
@@ -191,7 +194,7 @@ class SubjectController {
 
       const isInvalidBody = checkBodySchema({
         body: req.body,
-        schema: updateSubjectSchema
+        schema: bodySchemas.subject.update
       })
 
       if (isInvalidBody.length) {

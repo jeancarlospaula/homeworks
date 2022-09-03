@@ -1,5 +1,4 @@
-const { images } = require('../../src/templates/images/images.js')
-const { htmlResetPassWord, textResetPassword } = require('../../src/templates/resetPasswordEmail.js')
+const templates = require('../../src/templates')
 const { env } = require('../../__mocks__/env/variables')
 
 beforeEach(() => {
@@ -12,7 +11,7 @@ describe('resetPasswordEmail', () => {
       const name = 'Test Name'
       const resetPassToken = '123-token-test'
 
-      const textTemplate = textResetPassword({
+      const textTemplate = templates.text.resetPasswordEmail({
         name,
         resetPassToken
       })
@@ -27,7 +26,7 @@ describe('resetPasswordEmail', () => {
       const name = 'Test Name'
       const resetPassToken = '123-token-test'
 
-      const htmlTemplate = htmlResetPassWord({
+      const htmlTemplate = templates.html.resetPasswordEmail({
         name,
         resetPassToken
       })
@@ -40,7 +39,7 @@ describe('resetPasswordEmail', () => {
       </p>
       <p>Or access: <a href='${link}'>${link}</a></p>
       <p>Notice: This link is valid for two hours. If it expires, it will be necessary to perform the password reset process again.</p>
-      <img src='${images.emailBanner}' alt='HomeWorks Logo' height='50'/>
+      <img src='${templates.images.emailBanner}' alt='HomeWorks Logo' height='50'/>
       <br/>
       <br/>
       <p>This is an automated email, please do not reply.</p>

@@ -1,4 +1,4 @@
-const { sortDatesArray } = require('./../../src/utils/sortDatesArray')
+const { sortDatesArray } = require('./../../src/utils')
 
 describe('sortDatesArray', () => {
   it('should return the correct sorted array', () => {

@@ -7,4 +7,4 @@ const checkTokenExpired = ({ tokenDate, durationToken }) => {
   return isTokenExpired
 }
 
-module.exports = checkTokenExpired
+module.exports = { checkTokenExpired }

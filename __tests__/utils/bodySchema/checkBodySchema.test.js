@@ -1,6 +1,6 @@
-const checkBodySchema = require('./../../../src/utils/bodySchema/checkBodySchema')
+const { bodySchemas } = require('./../../../src/utils')
+const { checkBodySchema } = require('./../../../src/utils')
 const registerBody = require('./../../../__mocks__/bodyRequests/register.json')
-const { registerSchema } = require('./../../../src/utils/bodySchema/bodySchemas.js')
 
 describe('checkBodySchema', () => {
   it('should return an array with the missing fields in the schema', () => {
@@ -10,7 +10,7 @@ describe('checkBodySchema', () => {
 
     const fields = checkBodySchema({
       body,
-      schema: registerSchema
+      schema: bodySchemas.account.register
     })
 
     expect(fields).toEqual(['email', 'password'])
@@ -19,7 +19,7 @@ describe('checkBodySchema', () => {
   it('should return an empty array if all fields are filled', () => {
     const fields = checkBodySchema({
       body: registerBody,
-      schema: registerSchema
+      schema: bodySchemas.account.register
     })
 
     expect(fields).toEqual([])

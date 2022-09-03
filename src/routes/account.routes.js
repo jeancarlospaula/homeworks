@@ -1,6 +1,6 @@
 const { Router } = require('express')
-const AccountController = require('../controllers/Account.controller')
-const { validateToken } = require('../middlewares/validateToken')
+const { AccountController } = require('../controllers')
+const { validateToken } = require('../middlewares')
 const accountRoutes = Router()
 
 accountRoutes.post('/register', AccountController.register)

@@ -1,10 +1,10 @@
+const { getFooterMessage } = require('./getFooterMessage')
 const {
-  tasksStatusList: {
+  getDateFormattedByLanguage,
+  tasksStatusLanguages: {
     translation: statusTranslation
   }
-} = require('../../utils/enums/tasksStatusList')
-const { getDateFormattedByLanguage } = require('../../utils/getDateFormattedByLanguage')
-const { getFooterMessage } = require('./getFooterMessage')
+} = require('../../utils')
 
 const getReportTitle = ({ language = 'en' }) => {
   const title = {

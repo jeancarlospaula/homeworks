@@ -1,7 +1,10 @@
 const moment = require('moment')
-const { tasksStatusList } = require('../../utils/enums/tasksStatusList')
-const { getDateFormattedByLanguage } = require('../../utils/getDateFormattedByLanguage')
-const { sortDatesArray } = require('../../utils/sortDatesArray')
+
+const {
+  sortDatesArray,
+  getDateFormattedByLanguage,
+  tasksStatusLanguages
+} = require('../../utils')
 
 const getFooterMessage = ({ filters, language = 'en' }) => {
   const filtersMessage = {
@@ -32,7 +35,7 @@ const getFooterMessage = ({ filters, language = 'en' }) => {
     const statusList = filters.status.split(',')
     const statusNames = []
     statusList.forEach(status => {
-      const statusName = tasksStatusList.language[language][status]
+      const statusName = tasksStatusLanguages.language[language][status]
       if (statusName) statusNames.push(statusName)
     })
 

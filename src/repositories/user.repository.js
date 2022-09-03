@@ -1,4 +1,4 @@
-const User = require('../models/users.model')
+const { UsersModel: User } = require('./../models')
 
 class UserRepository {
   static async insert (userObj) {

@@ -1,32 +1,31 @@
-const checkBodySchema = require('../utils/bodySchema/checkBodySchema')
-const {
-  registerSchema,
-  confirmEmailSchema,
-  resetPasswordEmailSchema,
-  resetPasswordSchema,
-  loginSchema,
-  confirmAccountSchema
-} = require('../utils/bodySchema/bodySchemas')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
-const errorManager = require('../utils/errors/errorManager')
-const errorThrower = require('../utils/errors/errorThrower')
-const UserRepository = require('../repositories/user.repository')
-const AccountRepository = require('../repositories/account.repository')
 const { v4: V4uuid } = require('uuid')
-const { emailSender } = require('../services/email/emailSender')
-const { textConfirmationEmail, htmlConfirmationEmail } = require('../templates/confirmationEmail')
-const { textResetPassword, htmlResetPassWord } = require('../templates/resetPasswordEmail')
-const checkTokenExpired = require('../utils/checkTokenExpired')
-const BlacklistRepository = require('../repositories/blacklist.repository')
 const randomNumber = require('random-number')
+
+const templates = require('../templates')
+const { emailSender } = require('../services/email/emailSender')
+
+const {
+  checkBodySchema,
+  bodySchemas,
+  errorManager,
+  errorThrower,
+  checkTokenExpired
+} = require('../utils')
+
+const {
+  UserRepository,
+  AccountRepository,
+  BlacklistRepository
+} = require('../repositories')
 
 class AccountController {
   static async register (req, res) {
     try {
       const isInvalidBody = checkBodySchema({
         body: req.body,
-        schema: registerSchema
+        schema: bodySchemas.account.register
       })
 
       if (isInvalidBody.length) {
@@ -93,7 +92,7 @@ class AccountController {
     try {
       const isInvalidBody = checkBodySchema({
         body: req.body,
-        schema: confirmEmailSchema
+        schema: bodySchemas.account.confirmEmail
       })
 
       if (isInvalidBody.length) {
@@ -132,8 +131,8 @@ class AccountController {
       await emailSender({
         email,
         subject: `${user.firstName}, confirm your account`,
-        text: textConfirmationEmail({ name: user.firstName, confirmationToken }),
-        html: htmlConfirmationEmail({ name: user.firstName, confirmationToken }),
+        text: templates.text.confirmationEmail({ name: user.firstName, confirmationToken }),
+        html: templates.html.confirmationEmail({ name: user.firstName, confirmationToken }),
         type: 'Confirmation'
       })
 
@@ -162,7 +161,7 @@ class AccountController {
     try {
       const isInvalidBody = checkBodySchema({
         body: req.body,
-        schema: confirmAccountSchema
+        schema: bodySchemas.account.confirmAccount
       })
 
       if (isInvalidBody.length) {
@@ -182,7 +181,7 @@ class AccountController {
       if (!user) {
         errorThrower({
           message: {
-            description: 'There is no user registered with this email',
+            description: 'Error confirming account. Invalid email or token.',
             email
           },
           statusCode: 400
@@ -194,7 +193,7 @@ class AccountController {
       if (!account) {
         errorThrower({
           message: {
-            description: 'Error confirming account. Invalid account or token.',
+            description: 'Error confirming account. Invalid email or token.',
             email,
             confirmationToken: confirmationToken.toString()
           },
@@ -229,7 +228,7 @@ class AccountController {
     try {
       const isInvalidBody = checkBodySchema({
         body: req.body,
-        schema: resetPasswordEmailSchema
+        schema: bodySchemas.account.resetPasswordEmail
       })
 
       if (isInvalidBody.length) {
@@ -269,8 +268,8 @@ class AccountController {
       await emailSender({
         email,
         subject: `${user.firstName}, reset your password`,
-        text: textResetPassword({ name: user.firstName, resetPassToken }),
-        html: htmlResetPassWord({ name: user.firstName, resetPassToken }),
+        text: templates.text.resetPasswordEmail({ name: user.firstName, resetPassToken }),
+        html: templates.html.resetPasswordEmail({ name: user.firstName, resetPassToken }),
         type: 'Password reset'
       })
 
@@ -301,7 +300,7 @@ class AccountController {
 
       const isInvalidBody = checkBodySchema({
         body: req.body,
-        schema: resetPasswordSchema
+        schema: bodySchemas.account.resetPassword
       })
 
       if (isInvalidBody.length) {
@@ -369,7 +368,7 @@ class AccountController {
     try {
       const isInvalidBody = checkBodySchema({
         body: req.body,
-        schema: loginSchema
+        schema: bodySchemas.account.login
       })
 
       if (isInvalidBody.length) {
@@ -428,7 +427,7 @@ class AccountController {
         expiresIn: '24h'
       })
 
-      return res.status(200).json({ accessToken: token, firstName: user.firstName })
+      return res.status(200).json({ accessToken: token })
     } catch (error) {
       const response = errorManager({
         error,

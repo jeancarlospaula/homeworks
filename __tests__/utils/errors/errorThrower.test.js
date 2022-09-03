@@ -1,4 +1,4 @@
-const errorThrower = require('../../../src/utils/errors/errorThrower')
+const { errorThrower } = require('../../../src/utils')
 
 describe('errorThrower', () => {
   it('should throw an error', () => {

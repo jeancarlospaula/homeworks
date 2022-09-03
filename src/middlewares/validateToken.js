@@ -1,7 +1,10 @@
 const jwt = require('jsonwebtoken')
-const Blacklist = require('../repositories/blacklist.repository')
-const errorManager = require('../utils/errors/errorManager')
-const errorThrower = require('../utils/errors/errorThrower')
+const { BlacklistRepository: Blacklist } = require('../repositories')
+
+const {
+  errorManager,
+  errorThrower
+} = require('../utils')
 
 const validateToken = async (req, res, next) => {
   try {

@@ -1,7 +1,11 @@
 const moment = require('moment')
-const { Types: { ObjectId: generateObjectId } } = require('mongoose')
-const { getReportConditions } = require('../../../src/report/tasks/getReportConditions')
-const { sortDatesArray } = require('../../../src/utils/sortDatesArray')
+const { sortDatesArray } = require('../../../src/utils')
+const { getReportConditions } = require('../../../src/report/tasks')
+const {
+  Types: {
+    ObjectId: generateObjectId
+  }
+} = require('mongoose')
 
 describe('getReportConditions', () => {
   it('should return a query with finished equal to true when filters.status includes 2 (FINISHED)', () => {

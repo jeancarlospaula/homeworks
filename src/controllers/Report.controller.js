@@ -1,11 +1,19 @@
-const Task = require('../repositories/task.repository')
-const User = require('../repositories/user.repository')
-const Subject = require('../repositories/subject.repository')
-const errorManager = require('../utils/errors/errorManager')
-const { getReportConditions } = require('../report/tasks/getReportConditions')
-const { generateTasksReport } = require('../report/tasks/generateTasksReport')
-const { checkValidLanguages } = require('../utils/checkValidLanguages')
-const { checkValidStatusIds } = require('../utils/checkValidStatusIds')
+const {
+  TaskRepository: Task,
+  UserRepository: User,
+  SubjectRepository: Subject
+} = require('../repositories')
+
+const {
+  errorManager,
+  checkValidLanguages,
+  checkValidStatusIds
+} = require('../utils')
+
+const {
+  getReportConditions,
+  generateTasksReport
+} = require('../report/tasks')
 
 class ReportController {
   static async generate (req, res) {

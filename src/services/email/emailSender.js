@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer')
-const errorThrower = require('../../utils/errors/errorThrower')
+const { errorThrower } = require('../../utils')
 
 const emailSender = async ({ email, subject, text, html, type, attachments }) => {
   let emailSent = false

@@ -1,11 +1,12 @@
+const moment = require('moment')
+const docDefinitionMock = require('../../../__mocks__/report/tasks/docDefinition')
+
 const {
   getReportTitle,
   getColumnsName,
   getStatusLanguage,
   getReportTemplate
 } = require('../../../src/report/tasks/getReportTemplate')
-const docDefinitionMock = require('../../../__mocks__/report/tasks/docDefinition')
-const moment = require('moment')
 
 describe('getReportTemplate', () => {
   describe('getReportTitle', () => {

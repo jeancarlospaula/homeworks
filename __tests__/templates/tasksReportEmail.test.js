@@ -1,13 +1,12 @@
-const { images } = require('../../src/templates/images/images.js')
-const { htmlTasksReportEmail, textTasksReportEmail } = require('../../src/templates/tasksReportEmail')
+const templates = require('../../src/templates')
 
 describe('tasksReportEmail', () => {
   it('should return the correct HTML template', () => {
-    const template = htmlTasksReportEmail({ name: 'John' })
+    const template = templates.html.tasksReportEmail({ name: 'John' })
     expect(template).toEqual(`<div>
       <p>Hi John, here is your <b>PDF task report</b> attached.</p>
       <br/>
-      <img src='${images.emailBanner}' alt='HomeWorks Logo' height='50'/>
+      <img src='${templates.images.emailBanner}' alt='HomeWorks Logo' height='50'/>
       <br/>
       <br/>
       <p>This is an automated email, please do not reply.</p>
@@ -15,7 +14,7 @@ describe('tasksReportEmail', () => {
   })
 
   it('should return the correct text template', () => {
-    const template = textTasksReportEmail({ name: 'John' })
+    const template = templates.text.tasksReportEmail({ name: 'John' })
     expect(template).toEqual('Hi John here is your <b>PDF task report</b> attached.\nThis is an automated email, please do not reply.')
   })
 })

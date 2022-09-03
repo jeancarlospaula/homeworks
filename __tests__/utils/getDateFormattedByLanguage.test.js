@@ -1,4 +1,4 @@
-const { getDateFormattedByLanguage } = require('../../src/utils/getDateFormattedByLanguage')
+const { getDateFormattedByLanguage } = require('../../src/utils')
 
 describe('getFinalDateFormatted', () => {
   it('should return the correct date', () => {

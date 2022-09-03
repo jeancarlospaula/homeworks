@@ -1,6 +1,6 @@
-const { images } = require('./images/images.js')
+const images = require('./images.js')
 
-const htmlResetPassWord = ({ name, resetPassToken }) => {
+const htmlResetPasswordEmail = ({ name, resetPassToken }) => {
   const link = `${process.env.ENV_URL}/account/reset/password/${resetPassToken}`
   return `<div>
       <p>Hi ${name}, to reset your password,
@@ -15,9 +15,9 @@ const htmlResetPassWord = ({ name, resetPassToken }) => {
     </div>`
 }
 
-const textResetPassword = ({ name, resetPassToken }) => {
+const textResetPasswordEmail = ({ name, resetPassToken }) => {
   const link = `${process.env.ENV_URL}/account/reset/password/${resetPassToken}`
   return `Hi ${name}, to reset your password, visit the link below.\nLink: ${link}.\nThis is an automated email, please do not reply.`
 }
 
-module.exports = { htmlResetPassWord, textResetPassword }
+module.exports = { htmlResetPasswordEmail, textResetPasswordEmail }

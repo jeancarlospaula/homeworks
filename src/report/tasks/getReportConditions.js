@@ -1,8 +1,11 @@
 const moment = require('moment')
 const { isValidObjectId } = require('mongoose')
-const { tasksStatusList } = require('../../utils/enums/tasksStatusList')
-const { sortDatesArray } = require('../../utils/sortDatesArray')
-const errorThrower = require('./../../utils/errors/errorThrower')
+
+const {
+  sortDatesArray,
+  errorThrower,
+  tasksStatusList
+} = require('../../utils')
 
 const getReportConditions = ({ filters }) => {
   let conditions = {

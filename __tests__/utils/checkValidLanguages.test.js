@@ -1,4 +1,4 @@
-const { checkValidLanguages } = require('../../src/utils/checkValidLanguages')
+const { checkValidLanguages } = require('../../src/utils')
 
 describe('checkValidLanguages', () => {
   it('should throw an error when the language is not valid', () => {

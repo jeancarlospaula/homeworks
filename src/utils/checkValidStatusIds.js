@@ -1,4 +1,4 @@
-const { tasksStatusList } = require('./enums/tasksStatusList')
+const tasksStatusList = require('./enums/tasksStatusList')
 const errorThrower = require('./errors/errorThrower')
 
 const checkValidStatusIds = ({ statusArray }) => {

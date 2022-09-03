@@ -1,4 +1,4 @@
-const { getFooterMessage } = require('../../../src/report/tasks/getFooterMessage')
+const { getFooterMessage } = require('../../../src/report/tasks')
 
 describe('getFooterMessage', () => {
   it('should return the correct message if filters are passed', () => {
