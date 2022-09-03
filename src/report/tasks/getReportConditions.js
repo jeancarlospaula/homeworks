@@ -62,7 +62,7 @@ const getReportConditions = ({ filters }) => {
       if (!isValidObjectId(subject)) {
         errorThrower({
           message: {
-            description: 'Invalid subject id provided',
+            description: 'Invalid subject id provided.',
             data: {
               id: subject
             }

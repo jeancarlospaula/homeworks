@@ -111,10 +111,7 @@ class AccountController {
 
       if (!user) {
         errorThrower({
-          message: {
-            description: 'There is no user registered with this email',
-            email
-          },
+          message: 'There is no user registered with the provided email.',
           statusCode: 400
         })
       }
@@ -130,7 +127,7 @@ class AccountController {
 
       await emailSender({
         email,
-        subject: `${user.firstName}, confirm your account`,
+        subject: `${user.firstName}, confirm your account!`,
         text: templates.text.confirmationEmail({ name: user.firstName, confirmationToken }),
         html: templates.html.confirmationEmail({ name: user.firstName, confirmationToken }),
         type: 'Confirmation'
@@ -138,10 +135,7 @@ class AccountController {
 
       return res.status(200).json(
         {
-          message: {
-            description: 'Account confirmation email sent',
-            email
-          }
+          message: 'Account confirmation email sent'
         })
     } catch (error) {
       const response = errorManager({
@@ -180,9 +174,7 @@ class AccountController {
 
       if (!user) {
         errorThrower({
-          message: {
-            description: 'Error confirming account. Invalid email or token.'
-          },
+          message: 'Error confirming account. Invalid email or token.',
           statusCode: 400
         })
       }
@@ -191,22 +183,14 @@ class AccountController {
 
       if (!account) {
         errorThrower({
-          message: {
-            description: 'Error confirming account. Invalid email or token.'
-          },
+          message: 'Error confirming account. Invalid email or token.',
           statusCode: 400
         })
       }
 
-      return res.status(200).json(
-        {
-          message:
-          {
-            description: 'Account confirmed successfully.',
-            email,
-            firstName: user.firstName
-          }
-        })
+      return res.status(200).json({
+        message: 'Account confirmed successfully.'
+      })
     } catch (error) {
       const response = errorManager({
         error,
@@ -244,10 +228,7 @@ class AccountController {
 
       if (!user) {
         errorThrower({
-          message: {
-            description: 'There is no user registered with this email',
-            email
-          },
+          message: 'There is no user registered with the provided email.',
           statusCode: 400
         })
       }
@@ -264,19 +245,15 @@ class AccountController {
 
       await emailSender({
         email,
-        subject: `${user.firstName}, reset your password`,
+        subject: `${user.firstName}, reset your password!`,
         text: templates.text.resetPasswordEmail({ name: user.firstName, resetPassToken }),
         html: templates.html.resetPasswordEmail({ name: user.firstName, resetPassToken }),
         type: 'Password reset'
       })
 
-      return res.status(200).json(
-        {
-          message: {
-            description: 'Password reset email sent',
-            email
-          }
-        })
+      return res.status(200).json({
+        message: 'Password reset email sent.'
+      })
     } catch (error) {
       const response = errorManager({
         error,
@@ -316,10 +293,7 @@ class AccountController {
 
       if (!account) {
         errorThrower({
-          message: {
-            description: 'Error resetting password. Invalid Token.',
-            invalidToken: resetPassToken
-          },
+          message: 'Error resetting password. Invalid Token.',
           statusCode: 400
         })
       }
@@ -335,18 +309,13 @@ class AccountController {
         })
       }
 
-      const { email } = await UserRepository.findByIdAndUpdate(account.user, { password })
+      await UserRepository.findByIdAndUpdate(account.user, { password })
 
       await AccountRepository.deleteResetPassword(resetPassToken)
 
-      return res.status(200).json(
-        {
-          message:
-          {
-            description: 'Password reset successfully.',
-            email
-          }
-        })
+      return res.status(200).json({
+        message: 'Password reset successfully.'
+      })
     } catch (error) {
       const response = errorManager({
         error,
@@ -384,9 +353,7 @@ class AccountController {
 
       if (!user) {
         errorThrower({
-          message: {
-            description: 'Incorrect email or password.'
-          },
+          message: 'Incorrect email or password.',
           statusCode: 401
         })
       }
@@ -395,9 +362,7 @@ class AccountController {
 
       if (!validPassword) {
         errorThrower({
-          message: {
-            description: 'Incorrect email or password.'
-          },
+          message: 'Incorrect email or password.',
           statusCode: 401
         })
       }
@@ -406,10 +371,7 @@ class AccountController {
 
       if (!isAccountEmailConfirmed) {
         errorThrower({
-          message: {
-            description: 'Account not yet confirmed by email.',
-            email
-          },
+          message: 'Account not yet confirmed by email.',
           statusCode: 400
         })
       }
@@ -445,9 +407,7 @@ class AccountController {
 
       if (!token) {
         errorThrower({
-          message: {
-            description: 'To logout, it is necessary to inform the x-access-token header.'
-          },
+          message: 'To logout, it is necessary to inform the x-access-token header.',
           statusCode: 400
         })
       }
