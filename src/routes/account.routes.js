@@ -11,5 +11,6 @@ accountRoutes.patch('/reset/password/:resetPassToken', AccountController.resetPa
 accountRoutes.post('/login', AccountController.login)
 accountRoutes.post('/logout', AccountController.logout)
 accountRoutes.get('/user', validateToken, AccountController.getUser)
+accountRoutes.patch('/user', validateToken, AccountController.updateUser)
 
 module.exports = accountRoutes

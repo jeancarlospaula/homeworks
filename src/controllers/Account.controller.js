@@ -504,6 +504,52 @@ class AccountController {
       return res.status(400).json(response)
     }
   }
+
+  static async updateUser (req, res) {
+    try {
+      const body = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName
+      }
+
+      const newData = {}
+
+      if (body.firstName) newData.firstName = body.firstName
+
+      if (body.lastName) newData.lastName = body.lastName
+
+      if (!newData.firstName && !newData.lastName) {
+        errorThrower({
+          message: 'Not enough data to update user.',
+          statusCode: 400
+        })
+      }
+
+      const { user: userId } = req
+
+      const user = await UserRepository.findByIdAndUpdate(userId, newData)
+
+      if (!user) {
+        errorThrower({
+          message: 'User not found.',
+          statusCode: 404
+        })
+      }
+
+      return res.status(200).json({ message: 'User updated successfully.' })
+    } catch (error) {
+      const response = errorManager({
+        error,
+        genericMessage: 'Error updating user. Try again later.'
+      })
+
+      if (error.statusCode) {
+        return res.status(error.statusCode).json(response)
+      }
+
+      return res.status(400).json(response)
+    }
+  }
 }
 
 module.exports = AccountController
