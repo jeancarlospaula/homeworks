@@ -8,6 +8,9 @@ Back-end API of a tasks manager application
   <img align="center" alt="heroku" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-plain-wordmark.svg">
 </div><br>
 
+# Postman Documentation 
+https://documenter.getpostman.com/view/18745991/VUxSs5U9
+
 ## Account Routes
 ### Create an account
 - **POST:** `/account/register`
@@ -125,8 +128,6 @@ Back-end API of a tasks manager application
     - `pt` = Portuguese
 - **Example** = `/report/?status=0,1,2&subject=630bbf78a43262ceca616379,630bbf7f588bd78b550a5f5a&finalDate=2022-08-16,2022-01-12&language=pt`
 
-
-*More routes will come soon
 
 ## Front-end wireframe
 ![home-works-scope](https://user-images.githubusercontent.com/79765050/176801314-b38d96c9-dcfa-4d47-9099-3a0875023476.png)
