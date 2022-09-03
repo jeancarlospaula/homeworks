@@ -12,7 +12,7 @@
     "type": "git",
     "url": "git+https://github.com/jeancarlospaula/homeworks.git"
   },
-  "keywords": ["tasks", "homework", "subjects", "homework management", "school", "college", "university"],
+  "keywords": ["tasks", "homework", "subjects", "homework management", "school", "university", "college"],
   "author": "Jean Carlos de Paula",
   "license": "ISC",
   "bugs": {
