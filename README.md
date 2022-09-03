@@ -1,4 +1,4 @@
-# HomeWorks
+# Homeworks
 Back-end API of a tasks manager application
 
 <div style="display: inline_block">
