@@ -476,6 +476,34 @@ class AccountController {
       return res.status(400).json(response)
     }
   }
+
+  static async getUser (req, res) {
+    try {
+      const { user: userId } = req
+
+      const user = await UserRepository.findById(userId, 'firstName lastName email')
+
+      if (!user) {
+        errorThrower({
+          message: 'User not found.',
+          statusCode: 404
+        })
+      }
+
+      return res.status(200).json(user)
+    } catch (error) {
+      const response = errorManager({
+        error,
+        genericMessage: 'Error getting user. Try again later.'
+      })
+
+      if (error.statusCode) {
+        return res.status(error.statusCode).json(response)
+      }
+
+      return res.status(400).json(response)
+    }
+  }
 }
 
 module.exports = AccountController
