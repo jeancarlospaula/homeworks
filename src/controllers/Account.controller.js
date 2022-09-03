@@ -179,9 +179,18 @@ class AccountController {
         })
       }
 
-      const account = await AccountRepository.confirmAccountByTokenAndEmail(confirmationToken.toString(), user._id)
+      const account = await AccountRepository.findByUserId(user._id)
 
-      if (!account) {
+      if (account?.confirmedEmail) {
+        errorThrower({
+          message: 'Account already confirmed.',
+          statusCode: 400
+        })
+      }
+
+      const accountUpdated = await AccountRepository.confirmAccountByTokenAndEmail(confirmationToken.toString(), user._id)
+
+      if (!accountUpdated) {
         errorThrower({
           message: 'Error confirming account. Invalid email or token.',
           statusCode: 400
