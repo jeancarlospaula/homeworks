@@ -54,7 +54,8 @@ https://documenter.getpostman.com/view/18745991/VUxSs5U9
 
 ### Update user information
 - **PATCH:** `/account/user`
-- **Param type:** `Header`
+- **Param type:** `Header` and `Body`
+- **Body params:** `firstName` and `lastName` (optional fields)
 - **Header param:** `x-access-token`
 
 ## Subject Routes
