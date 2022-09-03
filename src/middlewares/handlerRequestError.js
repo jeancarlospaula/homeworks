@@ -5,4 +5,4 @@ const handlerRequestError = (error, req, res, next) => {
   }
 }
 
-module.exports = handlerRequestError
+module.exports = { handlerRequestError }

@@ -1,4 +1,4 @@
-const Task = require('../models/tasks.model')
+const { TasksModel: Task } = require('./../models')
 
 class TaskRepository {
   static async insert ({ name, user, subject, finalDate }) {

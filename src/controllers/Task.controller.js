@@ -1,18 +1,24 @@
 const moment = require('moment')
-const { createTaskSchema } = require('../utils/bodySchema/bodySchemas')
-const checkBodySchema = require('../utils/bodySchema/checkBodySchema')
-const errorManager = require('../utils/errors/errorManager')
-const errorThrower = require('../utils/errors/errorThrower')
 const { isValidObjectId } = require('mongoose')
-const Subject = require('../repositories/subject.repository')
-const Task = require('../repositories/task.repository')
+
+const {
+  errorManager,
+  errorThrower,
+  checkBodySchema,
+  bodySchemas
+} = require('../utils')
+
+const {
+  TaskRepository: Task,
+  SubjectRepository: Subject
+} = require('../repositories')
 
 class TaskController {
   static async create (req, res) {
     try {
       const isInvalidBody = checkBodySchema({
         body: req.body,
-        schema: createTaskSchema
+        schema: bodySchemas.task.create
       })
 
       if (isInvalidBody.length) {

@@ -1,4 +1,4 @@
-const Account = require('../models/accounts.model')
+const { AccountsModel: Account } = require('./../models')
 
 class AccountRepository {
   static async insert ({ userId, confirmationToken }) {

@@ -1,4 +1,4 @@
-const { htmlTasksReportEmail, textTasksReportEmail } = require('../../templates/tasksReportEmail')
+const templates = require('../../templates')
 const { pdfGenerator } = require('./../../services/pdf/pdfGenerator')
 const { getReportTemplate } = require('./getReportTemplate')
 
@@ -15,8 +15,8 @@ const generateTasksReport = ({ tasks, filters, userName, userEmail }) => {
   const params = {
     email: userEmail,
     subject: `${userName}, your tasks report is ready!`,
-    text: textTasksReportEmail({ name: userName }),
-    html: htmlTasksReportEmail({ name: userName }),
+    text: templates.text.tasksReportEmail({ name: userName }),
+    html: templates.html.tasksReportEmail({ name: userName }),
     attachments: [
       {
         filename: 'Tasks Report - HomeWorks.pdf',

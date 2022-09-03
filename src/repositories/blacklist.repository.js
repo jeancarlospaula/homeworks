@@ -1,4 +1,4 @@
-const Blacklist = require('../models/blacklists.model')
+const { BlacklistsModel: Blacklist } = require('./../models')
 
 class BlacklistRepository {
   static async insert ({ token }) {

@@ -1,10 +1,12 @@
 const express = require('express')
 const cors = require('cors')
-const handlerRequestError = require('../middlewares/handlerRequestError')
-const accountRoutes = require('./account.routes')
-const subjectRoutes = require('./subject.routes')
-const taskRoutes = require('./task.routes')
-const reportRoutes = require('./report.routes')
+const { handlerRequestError } = require('../middlewares')
+const {
+  accountRoutes,
+  subjectRoutes,
+  taskRoutes,
+  reportRoutes
+} = require('./index.js')
 
 const routes = express.Router()
 routes.use(

@@ -1,4 +1,4 @@
-const errorManager = require('../../../src/utils/errors/errorManager')
+const { errorManager } = require('../../../src/utils')
 
 describe('errorManager', () => {
   it('should return an object with the error message specified in the parameter', () => {

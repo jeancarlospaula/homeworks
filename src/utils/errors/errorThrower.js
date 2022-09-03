@@ -5,4 +5,4 @@ const errorThrower = ({ message, statusCode }) => {
   throw error
 }
 
-module.exports = errorThrower
+module.exports = { errorThrower }

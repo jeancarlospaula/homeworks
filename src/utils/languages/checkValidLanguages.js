@@ -1,4 +1,4 @@
-const errorThrower = require('./errors/errorThrower')
+const errorThrower = require('../errors/errorThrower')
 
 const checkValidLanguages = ({ language }) => {
   const validLanguages = ['pt', 'en', 'es']

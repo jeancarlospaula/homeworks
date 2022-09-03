@@ -1,4 +1,4 @@
-const { checkValidStatusIds } = require('../../src/utils/checkValidStatusIds')
+const { checkValidStatusIds } = require('../../src/utils')
 
 describe('checkValidStatusIds', () => {
   it('should return an error when an invalid status id is provided', () => {

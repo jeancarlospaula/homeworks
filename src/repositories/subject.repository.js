@@ -1,4 +1,4 @@
-const Subject = require('../models/subjects.model')
+const { SubjectsModel: Subject } = require('./../models')
 
 class SubjectRepository {
   static async insert ({ user, name }) {

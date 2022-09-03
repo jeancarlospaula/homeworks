@@ -1,4 +1,4 @@
-const { images } = require('./images/images.js')
+const images = require('./images.js')
 
 const htmlTasksReportEmail = ({ name }) => {
   return `<div>

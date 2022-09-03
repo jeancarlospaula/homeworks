@@ -1,17 +1,23 @@
-const {
-  registerSchema,
-  confirmEmailSchema,
-  resetPasswordEmailSchema,
-  resetPasswordSchema,
-  loginSchema
-} = require('../../../src/utils/bodySchema/bodySchemas')
+const { bodySchemas } = require('../../../src/utils')
 
 describe('bodySchema', () => {
   it('should return the request body schemas correctly', () => {
-    expect(registerSchema).toEqual(['firstName', 'lastName', 'email', 'password'])
-    expect(confirmEmailSchema).toEqual(['email'])
-    expect(resetPasswordEmailSchema).toEqual(['email'])
-    expect(resetPasswordSchema).toEqual(['password'])
-    expect(loginSchema).toEqual(['email', 'password'])
+    expect(bodySchemas).toStrictEqual({
+      account: {
+        register: ['firstName', 'lastName', 'email', 'password'],
+        confirmEmail: ['email'],
+        confirmAccount: ['email', 'confirmationToken'],
+        resetPasswordEmail: ['email'],
+        resetPassword: ['password'],
+        login: ['email', 'password']
+      },
+      subject: {
+        create: ['name'],
+        update: ['name']
+      },
+      task: {
+        create: ['name', 'subject', 'finalDate']
+      }
+    })
   })
 })
