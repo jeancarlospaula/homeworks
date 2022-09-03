@@ -47,6 +47,16 @@ https://documenter.getpostman.com/view/18745991/VUxSs5U9
 - **Param type:** `Header`
 - **Header param:** `x-access-token`
 
+### Get user information
+- **GET:** `/account/user`
+- **Param type:** `Header`
+- **Header param:** `x-access-token`
+
+### Update user information
+- **PATCH:** `/account/user`
+- **Param type:** `Header`
+- **Header param:** `x-access-token`
+
 ## Subject Routes
 ### Create a subject
 - **POST:** `/subject/create`
@@ -59,18 +69,18 @@ https://documenter.getpostman.com/view/18745991/VUxSs5U9
 - **Param type:** `Header`
 - **Header param:** `x-access-token`
 
-### Get an user subject by id
+### Get a user subject by id
 - **GET:** `/subject/:id`
 - **Params types:** `Header` and `Route`
 - **Header param:** `x-access-token`
 
-### Update an user subject by id
+### Update a user subject by id
 - **PATCH:** `/subject/:id`
 - **Params types:** `Header`, `Body` and `Route`
 - **Body param:** `name`
 - **Header param:** `x-access-token`
 
-### Delete an user subject by id
+### Delete a user subject by id
 - **DELETE:** `/subject/:id`
 - **Params types:** `Header` and `Route`
 - **Header param:** `x-access-token`
@@ -87,18 +97,18 @@ https://documenter.getpostman.com/view/18745991/VUxSs5U9
 - **Param type:** `Header`
 - **Header param:** `x-access-token`
 
-### Get an user task by id
+### Get a user task by id
 - **GET:** `/task/:id`
 - **Params types:** `Header` and `Route`
 - **Header param:** `x-access-token`
 
-### Update an user task by id
+### Update a user task by id
 - **PATCH:** `/task/:id`
 - **Params types:** `Header`, `Body` and `Route`
 - **Body param:** `name`,`subject`, `finalDate` and `finished` (optional fields)
 - **Header param:** `x-access-token`
 
-### Delete an user task by id
+### Delete a user task by id
 - **DELETE:** `/task/:id`
 - **Params types:** `Header` and `Route`
 - **Header param:** `x-access-token`
